@@ -1,0 +1,9 @@
+/* Start Landing */
+.landing {
+    background-image: url(../assets/bg-landing.svg);
+    min-height: calc(100vh - 72px);
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+/* End Landing */

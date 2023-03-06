@@ -1,0 +1,11 @@
+.avis .head {
+    background-image: url(../assets/avis_clients.svg);
+    min-height: 100vh;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.avis {
+    height: 1080px;
+}
+
