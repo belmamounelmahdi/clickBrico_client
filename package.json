@@ -60,5 +60,5 @@
   "devDependencies": {
     "tailwindcss": "^3.2.4"
   },
-  "proxy": "https://clickbrico-server.herokuapp.com"
+  "proxy": "https://clickbrico-server.herokuapp.com/"
 }
