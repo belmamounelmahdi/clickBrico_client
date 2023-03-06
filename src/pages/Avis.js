@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import wretch from 'https://cdn.skypack.dev/wretch'
+import wretch from 'wretch';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faStar } from "@fortawesome/free-solid-svg-icons"
 import Loading from '../components/Loading'
