@@ -6,6 +6,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import Loading from '../components/Loading';
+import API_URL from '../config';
 
 function Menage() {
     const auth = useSelector(state => state.auth)
@@ -20,7 +21,7 @@ function Menage() {
     
 
     const sendMessage = async (message) => {
-        const response = await fetch('/send-message', {
+        const response = await fetch(`${API_URL}/send-message`, {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json'
@@ -46,7 +47,7 @@ function Menage() {
     }
 
     useEffect(() => {
-        axios.get('/service-menage')
+        axios.get(`${API_URL}/service-menage`)
         .then(res => {
             setJobberProfiles(res.data);
             if (res.data.profile.photo) {
@@ -60,7 +61,7 @@ function Menage() {
     return (
     <div>
         <h1>
-            Nos électriciens sont à votre service
+            Nos femmes de ménage sont à votre service
         </h1>
         {jobberProfiles.length === 0 ?<div className='flex flex-col items-center mt-24 space-y-10'> <Loading /> <h1 className='font-bold text-lg'>Désolé ce service ne dispose pas des prestataires</h1></div> : (
         <div className='flex h-screen'>

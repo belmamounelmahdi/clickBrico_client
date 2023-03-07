@@ -6,6 +6,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import Loading from '../components/Loading';
+import API_URL from '../config';
 
 function Electriciens() {
     const auth = useSelector(state => state.auth)
@@ -20,7 +21,7 @@ function Electriciens() {
     
 
     const sendMessage = async (message) => {
-        const response = await fetch('/send-message', {
+        const response = await fetch(`${API_URL}/send-message`, {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json'
@@ -44,9 +45,9 @@ function Electriciens() {
         setSelectedProviderEmail(email);
         setDisplay("inline")
     }
-
+    
     useEffect(() => {
-        axios.get('/service-electriciens')
+        axios.get(`${API_URL}/service-electriciens`)
         .then(res => {
             setJobberProfiles(res.data);
             if (res.data.profile.photo) {

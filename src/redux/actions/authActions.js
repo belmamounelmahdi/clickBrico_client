@@ -2,10 +2,11 @@ import axios from 'axios'
 import { ERRORS, SET_USER } from '../types'
 import jwt_decode from 'jwt-decode'
 import { setAuth } from '../../util/setAuth'
+import API_URL from '../../config'
 
 
 export const Registration = (form, navigate)=>dispatch => {
-    axios.post('/api/register', form)
+    axios.post(`${API_URL}/api/register`, form)
     .then( res => {
         navigate('/login')
         dispatch({
@@ -22,7 +23,7 @@ export const Registration = (form, navigate)=>dispatch => {
 }
 
 export const LoginAction = (form, navigate)=>dispatch => {
-    axios.post('/api/login', form)
+    axios.post(`${API_URL}/api/login`, form)
     .then( res => {
         const {token} = res.data
         localStorage.setItem('jwt', token)

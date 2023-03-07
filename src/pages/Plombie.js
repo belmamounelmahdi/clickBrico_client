@@ -6,6 +6,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import Loading from '../components/Loading';
+import API_URL from '../config';
 
 function Plombie () {
     const auth = useSelector(state => state.auth)
@@ -20,7 +21,7 @@ function Plombie () {
     
 
     const sendMessage = async (message) => {
-        const response = await fetch('/send-message', {
+        const response = await fetch(`${API_URL}/send-message`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -49,7 +50,7 @@ function Plombie () {
     }
 
     useEffect(() => {
-        axios.get('/service-plombie')
+        axios.get(`${API_URL}/service-plombie`)
         .then(res => {
             setJobberProfiles(res.data);
             if (res.data.profile.photo) {

@@ -1,10 +1,11 @@
 import axios from 'axios'
+import API_URL from '../../config'
 import { DELETE_PROFILE, ERRORS, SET_PROFILE, SET_PROFILES } from '../types'
 
 
 
 export const AddProfile = (form, setShow, setMessage) => dispatch => {
-    axios.post('/api/profiles', form)
+    axios.post(`${API_URL}/api/profiles`, form)
     .then( res => {
         setShow(true)
         setMessage("User added with success")
@@ -26,7 +27,7 @@ export const AddProfile = (form, setShow, setMessage) => dispatch => {
 
 export const GetProfile = () => dispatch => {
     axios
-    .get('/api/profile')
+    .get(`${API_URL}/api/profile`)
     .then( res => {
         dispatch({
             type: SET_PROFILE,
@@ -44,7 +45,7 @@ export const GetProfile = () => dispatch => {
 
 export const GetProfiles = () => dispatch => {
     axios
-    .get('/api/profiles')
+    .get(`${API_URL}/api/profiles`)
     .then( res => {
         dispatch({
             type: SET_PROFILES,
@@ -62,7 +63,7 @@ export const GetProfiles = () => dispatch => {
 export const DeleteProfile = (id) => dispatch => {
     if (window.confirm('Vous voulez supprimer cette utilisateur ?' )) {
         axios
-    .delete(`/api/profile/${id}`)
+    .delete(`${API_URL}/api/profile/${id}`)
     .then( res => {
         dispatch({
             type: DELETE_PROFILE,

@@ -3,6 +3,7 @@ import wretch from 'wretch';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faStar } from "@fortawesome/free-solid-svg-icons"
 import Loading from '../components/Loading'
+import API_URL from "../config";
 
 
 const Stars = () => {
@@ -28,7 +29,7 @@ const Avis = () => {
 
     
     useEffect(() => {
-        fetch("/avis").then(
+        fetch(`${API_URL}/avis`).then(
             response => response.json()
             ).then(
                 data => {
@@ -38,10 +39,10 @@ const Avis = () => {
                 
             }, [])
             
-            
+
     const handelSubmit = (event) => {
         event.preventDefault();
-        wretch('/api/submitavis')
+        wretch(`${API_URL}/api/submitavis`)
         .post({
         "nom": nom,
         "title": title,
