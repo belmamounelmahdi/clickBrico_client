@@ -1,18 +1,12 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import {  Link, Route, Routes } from 'react-router-dom'
 import Compte from './Compte'
 
 const LeftBar = () => {
+  const profiles = useSelector( state => state.profiles)
   return (
     <div className='bg-red-300 absolute'>
-      <ul>
-        <Link to='/compte'>
-        <li>test</li>
-        </Link>
-        <li>test</li>
-        <li>test</li>
-        <li>test</li>
-      </ul>
     </div>
   )
 }

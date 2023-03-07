@@ -5,7 +5,7 @@ import { setAuth } from '../../util/setAuth'
 
 
 export const Registration = (form, navigate)=>dispatch => {
-    axios.post('api/register', form)
+    axios.post('/api/register', form)
     .then( res => {
         navigate('/login')
         dispatch({
@@ -22,7 +22,7 @@ export const Registration = (form, navigate)=>dispatch => {
 }
 
 export const LoginAction = (form, navigate)=>dispatch => {
-    axios.post('api/login', form)
+    axios.post('/api/login', form)
     .then( res => {
         const {token} = res.data
         localStorage.setItem('jwt', token)

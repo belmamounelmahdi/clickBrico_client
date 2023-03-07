@@ -24,7 +24,6 @@ import Electriciens from './pages/Electriciens'
 import Peinture from './pages/Peinture'
 import Jardinage from './pages/Jardinage'
 import Users from './pages/Users'
-import SideBar from './components/SideBar'
 import SettingUser from './pages/SettingUser'
 import Plombie from './pages/Plombie'
 import Menage from './pages/Ménage'
@@ -57,7 +56,7 @@ function App() {
       <Nav user={user} />
       <ShareApp/>
 
-      {user.role === 'ADMIN' ? <SideBar/> : ""}
+
 
 
       <Routes>
