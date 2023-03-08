@@ -29,6 +29,7 @@ const Avis = () => {
 
     
     useEffect(() => {
+        window.scrollTo(0, 0)
         fetch(`${API_URL}/avis`).then(
             response => response.json()
             ).then(

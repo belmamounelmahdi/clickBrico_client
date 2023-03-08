@@ -8,7 +8,7 @@ export const AddProfile = (form, setShow, setMessage) => dispatch => {
     axios.post(`${API_URL}/api/profiles`, form)
     .then( res => {
         setShow(true)
-        setMessage("User added with success")
+        setMessage("Profil modifié avec succès")
         dispatch({
             type: ERRORS,
             payload: {}

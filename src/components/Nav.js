@@ -41,7 +41,7 @@ export default function Nav({ user }) {
   // console.log(profiles.profile === null)
   return (
     <>
-      <div className="sticky top-0 shadow-md">
+      <div className="sticky top-0 z-10 shadow-md">
         <nav className="bg-white ">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16">
@@ -137,7 +137,7 @@ export default function Nav({ user }) {
                             </div>
                             {displayList && (
                               <ul
-                                className="listDown absolute translate-y-6 translate-x-6 bg-white w-56 z-10 -left-56 top-4 space-y-3 shadow-2xl"
+                                className="listDown absolute transform transition-transform  translate-y-6 translate-x-6 ease-in-out duration-500 bg-white w-56 z-10 -left-56 top-4 space-y-3 shadow-2xl"
                                 onMouseEnter={handleOpen}
                                 onMouseLeave={handleClose}
                               >
@@ -163,13 +163,13 @@ export default function Nav({ user }) {
                   </div>
                 </div>
               </div>
-              <button className="bg-sky-600 hover:bg-sky-500 hidden md:inline p-2 rounded-2xl text-white">
+              <Link to={user.isConnected ? '/profile' : '/login'} className="bg-sky-600 hover:bg-sky-500 hidden md:inline p-2 rounded-2xl text-white">
                 <FontAwesomeIcon
                   className="mr-2"
                   icon={faPlusCircle}
                 ></FontAwesomeIcon>
                 Demander un service
-              </button>
+              </Link>
               <div className="-mr-2 flex md:hidden">
                 <button
                   onClick={() => setIsOpen(!isOpen)}
@@ -262,7 +262,7 @@ export default function Nav({ user }) {
                         <Link
                           to="#"
                           onClick={LogoutHandler}
-                          className=" hover:bg-gray-300 text-gray-600 px-3 py-2 rounded-md text-sm font-medium"
+                          className=" text-stone-500 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                         >
                           Déconnexion
                         </Link>
@@ -270,10 +270,10 @@ export default function Nav({ user }) {
                     </div>
                   )}
                   <Link
-                    to="/profile"
-                    className=" hover:bg-gray-300 text-gray-600 px-3 py-2 rounded-md text-sm font-medium"
+                    to="/setting-user"
+                    className="text-stone-500 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                   >
-                    Compte
+                    Paramétres du compte
                   </Link>
                 </div>
               </div>

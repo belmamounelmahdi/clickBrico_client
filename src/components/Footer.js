@@ -9,7 +9,7 @@ const Footer = () => {
     return (
     <>
     <hr />
-        <div className='hidden md:flex justify-evenly p-4 z-50'>
+        <div className='flex flex-col space-y-12 items-center md:flex justify-evenly p-4 z-50'>
             <div className='social-media'>
                 <div className="logo w-14 ml-2 mr-2">
                     <Link to='accueil'>
@@ -29,7 +29,7 @@ const Footer = () => {
                 </div>
             </div>
 
-            <div className='decouvrir flex flex-col'>
+            <div className='decouvrir hidden md:flex md:flex-col'>
                 <h1 className='text-2xl'>
                     Découvrir
                 </h1>
@@ -68,7 +68,7 @@ const Footer = () => {
             </div>
         </div>
         <hr />
-        <div className='hidden md:inline'>
+        <div className=' md:inline'>
             <p className='text-center'>
             Copyright © 2023 ClickBrico | Powered by <Link onClick={() => navigate('https://www.belmamounelmahdi.com/')}>El Mahdi Belmamoun</Link>
             </p>

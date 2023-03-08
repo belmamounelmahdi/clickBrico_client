@@ -60,13 +60,13 @@ function Electriciens() {
     }, []);
     return (
     <div>
-        <h1>
+        <h1 className='font-semibold text-xl text-center m-4'>
             Nos électriciens sont à votre service
         </h1>
         {jobberProfiles.length === 0 ?<div className='flex flex-col items-center mt-24 space-y-10'> <Loading /> <h1 className='font-bold text-lg'>Désolé ce service ne dispose pas des prestataires</h1></div> : (
-        <div className='flex h-screen'>
+        <div className='flex flex-col h-screen'>
         {jobberProfiles.map((ele, index) => (
-            <div key={index} className="w-80 h-64 p-4 shadow-2xl m-8">
+            <div key={index} className="w-auto md:w-80 h-auto md:h-64 p-4 shadow-2xl m-8">
                 <img className='w-24' src={ele.profile.photo && `data:${ele.profile.photo.contentType};base64,${ele.profile.photo.data.toString('base64')}`} alt="Profile Photo" />
 
                 <h1>
@@ -84,7 +84,7 @@ function Electriciens() {
                 <h1 className='hidden'>
                 {ele.email}
                 </h1>
-        <button data-toggle="modal" data-target="#exampleModal" onClick={handleSelectProvider} className='bg-sky-600 hover:bg-sky-500 hidden md:inline p-2 text-white'>
+        <button data-toggle="modal" data-target="#exampleModal" onClick={handleSelectProvider} className='bg-sky-600 hover:bg-sky-500 p-2 text-white'>
             Envoyer un message
         </button>
             </div>

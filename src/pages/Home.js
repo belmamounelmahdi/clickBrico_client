@@ -33,9 +33,9 @@ const Home = () => {
         <>
         {/** Start Landing */}
         
-            <div className="landing hidden md:flex flex-col justify-center ">
-                <div className="ml-48">
-                <h1 className="text-5xl">
+            <div className="landing md:flex flex flex-col md:items-start justify-center items-center">
+                <div className="md:ml-28">
+                <h1 className="text-3xl md:text-5xl">
                     Trouvez le prestataire idéal 
                     <br /> 
                     pour tous les services du 
@@ -58,7 +58,7 @@ const Home = () => {
         {/** Start Services */}
 
             <div className="mt-2 md:mt-36 ">
-                <h1 className="text-center text-xl md:text-4xl md:text-left md:ml-4">
+                <h1 className="text-center font-semibold m-4 text-xl md:text-4xl md:text-left md:ml-4">
                     De quel service avez-vous besoin ? 
                 </h1>
                 <div className="flex flex-wrap justify-center mt-12">
@@ -206,8 +206,8 @@ const Home = () => {
 
         {/** Start Avis Clients */}
 
-        <div className="flex flex-col md:flex-row md:justify-between border-solid border-2 rounded-3xl m-6 md:m-36 p-10 md:pl-24 md:pr-24 md:pt-10 md:pb-10">
-            <div className="content-left w-96">
+        <div className="flex flex-col space-y-16 md:flex-row md:justify-between border-solid border-2 rounded-3xl m-6 md:m-36 p-10 md:pl-24 md:pr-24 md:pt-10 md:pb-10">
+            <div className="content-left w-auto md:w-96">
                 <h1 className="text-lg font-semibold">
                     Les utilisateurs nous font confiance
                 </h1>
