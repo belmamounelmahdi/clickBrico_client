@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaGoogle } from 'react-icons/fa';
 import { faBellConcierge, faBriefcase, faEnvelope, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,6 +10,9 @@ import { Registration } from "../redux/actions/authActions";
 
 
 const Inscription = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
     const [ display, setDisplay ] = useState("hidden")
     const [ form, setForm ] = useState({})
     const dispatch = useDispatch()

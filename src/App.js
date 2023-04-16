@@ -28,6 +28,7 @@ import SettingUser from './pages/SettingUser'
 import Plombie from './pages/Plombie'
 import Menage from './pages/Ménage'
 import ShareApp from './components/ShareApp'
+import Chat from './pages/Chat'
 
 
 if (window.localStorage.jwt) {
@@ -88,6 +89,10 @@ function App() {
         <Route path='/menage' element={
         <PrivateRouter user={user}>
           <Menage />
+        </PrivateRouter>}/>
+        <Route path='/chat' element={
+        <PrivateRouter user={user}>
+          <Chat />
         </PrivateRouter>}/>
         <Route path='demanderservice' element={<DemanderService/>}/>
         <Route path='ajoutePrestataire' element={<AjoutePrestataire/>}/>

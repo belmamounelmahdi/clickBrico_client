@@ -9,7 +9,7 @@ const Footer = () => {
     return (
     <>
     <hr />
-        <div className='flex flex-col space-y-12 items-center md:flex justify-evenly p-4 z-50'>
+        <div className='flex flex-col md:flex-row space-y-12 items-center md:flex justify-evenly p-4 z-50'>
             <div className='social-media'>
                 <div className="logo w-14 ml-2 mr-2">
                     <Link to='accueil'>

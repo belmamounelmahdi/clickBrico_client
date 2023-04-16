@@ -9,9 +9,6 @@ const AjoutePrestataire = () => {
             </h1> 
             <img className='w-80 md:96' src={imsService}  />
         </div>
-        <button className="bg-sky-600 hover:bg-sky-500 hidden md:inline p-2 rounded-2xl text-white">
-            Je m'inscris
-        </button>
         </div>
     );
 }

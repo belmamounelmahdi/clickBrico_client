@@ -1,7 +1,7 @@
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { FaGoogle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Inputs from "../components/Inputs";
 import { useDispatch, useSelector } from "react-redux";
 import { LoginAction } from "../redux/actions/authActions";
@@ -9,6 +9,9 @@ import { LoginAction } from "../redux/actions/authActions";
 
 
 const Connexion = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
     const [ form, setForm ] = useState({})
     const dispatch = useDispatch()
     const errors = useSelector( state => state.errors)

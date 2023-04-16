@@ -58,22 +58,23 @@ function Electriciens() {
         }) 
         .catch(err => console.log(err));
     }, []);
+
     return (
     <div>
         <h1 className='font-semibold text-xl text-center m-4'>
-            Nos électriciens sont à votre service
+            Nos électriciens sont à votre service 
         </h1>
         {jobberProfiles.length === 0 ?<div className='flex flex-col items-center mt-24 space-y-10'> <Loading /> <h1 className='font-bold text-lg'>Désolé ce service ne dispose pas des prestataires</h1></div> : (
-        <div className='flex flex-col h-screen'>
+        <div className='flex flex-col md:flex-wrap h-screen'>
         {jobberProfiles.map((ele, index) => (
             <div key={index} className="w-auto md:w-80 h-auto md:h-64 p-4 shadow-2xl m-8">
-                <img className='w-24' src={ele.profile.photo && `data:${ele.profile.photo.contentType};base64,${ele.profile.photo.data.toString('base64')}`} alt="Profile Photo" />
+                <img className='w-24 rounded-full' src={ele.profile.photo && `data:${ele.profile.photo.contentType};base64,${ele.profile.photo.data.toString('base64')}`} alt="Profile Photo" />
 
                 <h1>
                     {ele.name}
                 </h1>
-                <h1>
-                    {ele.service}
+                <h1 className='hidden'>
+                    {ele.email}
                 </h1>
                 <h1>
                     {ele.profile.city}
@@ -81,10 +82,8 @@ function Electriciens() {
                 <h1>
                     {ele.profile.address}
                 </h1>
-                <h1 className='hidden'>
-                {ele.email}
-                </h1>
-        <button data-toggle="modal" data-target="#exampleModal" onClick={handleSelectProvider} className='bg-sky-600 hover:bg-sky-500 p-2 text-white'>
+
+        <button data-toggle="modal" data-target="#exampleModal" onClick={() => handleSelectProvider(ele.email)} className='bg-sky-600 hover:bg-sky-500 p-2 text-white'>
             Envoyer un message
         </button>
             </div>
@@ -128,6 +127,7 @@ function Electriciens() {
         e.preventDefault();
         sendMessage(e.target.message.value);
         e.target.message.value = "";
+        handelClose()
     }}>
             <label htmlFor="message">Message</label>
             <textarea name="message" className="border-2 border-sky-200 bg-gray-100 rounded-lg p-3 w-72 h-60 focus:outline-sky-600"  placeholder="Bonjour, est ce que ..." ></textarea>
