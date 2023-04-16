@@ -73,7 +73,7 @@ const Avis = () => {
 
 
     return ( 
-        <div className="avis">
+        <div className="avis mb-96">
             {/** Start Add Avis */}
             
     <div className={display+ " modal fade fixed top-20 left-3 md:left-1/3 w-84 md:96 outline-none overflow-x-hidden overflow-y-auto"}
@@ -145,7 +145,7 @@ const Avis = () => {
                     <a href="#avis-c" className="bg-sky-600 p-3 rounded-xl text-white ml-2 mr-2 mt-20 shadow-2xl hover:bg-sky-500 ">Lire les avis</a>
                 </div>                           
             </div>
-            <div id="avis-c" className="avis-clients flex">
+            <div id="avis-c" className="avis-clients flex flex-wrap justify-center">
                 
                     {(typeof backendData == 'undefined') ? (
                         <div>
@@ -154,7 +154,7 @@ const Avis = () => {
                     ): (
                         backendData.map((element, id) => (
                             <div >
-                                <div key={id} className="w-80 h-56 p-4 shadow-2xl m-8">
+                                <div key={id} className="w-80 h-72 p-4 shadow-2xl m-8">
                                 <Stars />
                                 <h1>
                                     {element.nom}

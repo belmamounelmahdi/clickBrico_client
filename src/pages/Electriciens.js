@@ -65,7 +65,7 @@ function Electriciens() {
             Nos électriciens sont à votre service 
         </h1>
         {jobberProfiles.length === 0 ?<div className='flex flex-col items-center mt-24 space-y-10'> <Loading /> <h1 className='font-bold text-lg'>Désolé ce service ne dispose pas des prestataires</h1></div> : (
-        <div className='flex flex-col md:flex-wrap h-screen'>
+        <div className='flex md:flex-wrap h-screen'>
         {jobberProfiles.map((ele, index) => (
             <div key={index} className="w-auto md:w-80 h-auto md:h-64 p-4 shadow-2xl m-8">
                 <img className='w-24 rounded-full' src={ele.profile.photo && `data:${ele.profile.photo.contentType};base64,${ele.profile.photo.data.toString('base64')}`} alt="Profile Photo" />
