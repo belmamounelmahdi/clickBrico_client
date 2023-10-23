@@ -7,7 +7,7 @@ import playStore from '../assets/play-store.png'
 const Footer = () => {
     const navigate = useNavigate()
     return (
-    <>
+    <div>
     <hr />
         <div className='flex flex-col md:flex-row space-y-12 items-center md:flex justify-evenly p-4 z-50'>
             <div className='social-media'>
@@ -73,7 +73,7 @@ const Footer = () => {
             Copyright © 2023 ClickBrico | Powered by <Link onClick={() => navigate('https://www.belmamounelmahdi.com/')}>El Mahdi Belmamoun</Link>
             </p>
         </div>
-    </>
+    </div>
     );
 }
 

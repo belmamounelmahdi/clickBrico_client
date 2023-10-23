@@ -59,11 +59,14 @@ const Inscription = () => {
             </Link>
 
             {/** Start Modal Inscription */}
-    <div className={display+ " modal fade fixed top-14 left-0 md:left-1/3 md:top-24 w-auto md:w-1/3 h-auto outline-none overflow-x-hidden overflow-y-auto z-10 shadow-2xl"}
-        id="exampleModal" 
-        tabindex="-1" 
-        aria-labelledby="exampleModalLabel" 
-        aria-hidden="true">
+            <div className={
+    display + " modal fade fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-11/12 sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 overflow-y-auto z-10 shadow-2xl"
+}
+     id="exampleModal" 
+     tabindex="-1" 
+     aria-labelledby="exampleModalLabel" 
+     aria-hidden="true"
+>
 
     <button
     onClick={handelClose}

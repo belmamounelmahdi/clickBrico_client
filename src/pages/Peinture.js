@@ -5,9 +5,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import API_URL from "../config";
+import {API_URL} from "../config";
+import Loading from "../components/Loading";
 
 function Peinture() {
+
   const auth = useSelector((state) => state.auth);
   const user = {
     name: auth.user.name,
@@ -45,8 +47,8 @@ function Peinture() {
   };
 
   useEffect(() => {
-    axios
-      .get(`${API_URL}/service-peinture`)
+    window.scrollTo(0, 0)
+    axios.get(`${API_URL}/service-peinture`)
       .then((res) => {
         setJobberProfiles(res.data);
         if (res.data.profile.photo) {
@@ -59,38 +61,36 @@ function Peinture() {
       })
       .catch((err) => console.log(err));
   }, []);
-  console.log(jobberProfiles);
+
   return (
     <div>
       <h1>Nos peintre sont à votre service</h1>
 
       <div className="flex h-screen">
-        {jobberProfiles.map((ele, index) => (
-          <div key={index} className="w-80 h-64 p-4 shadow-2xl m-8">
-            <img
-              className="w-24 h-24"
-              src={
-                ele.profile.photo &&
-                `data:${
-                  ele.profile.photo.contentType
-                };base64,${ele.profile.photo.data.toString("base64")}`
-              }
-              alt="Profile Photo"
-            />
+      {jobberProfiles.length === 0 ? 
+        <div className='flex flex-col items-center mt-24 space-y-10'> 
+            <Loading /> 
+            <h1 className='font-bold text-lg'>
+                Désolé ce service ne dispose pas des prestataires
+            </h1>
+        </div> : 
+        <div className='flex flex-col md:flex-row md:flex-wrap'>
+            {jobberProfiles.map((ele, index) => (
+                <div key={index} className="w-full md:w-80 h-auto md:h-64 p-4 shadow-2xl m-2 md:m-8">
+                    <img className='w-24 rounded-full' src={ele.profile.photo && `data:${ele.profile.photo.contentType};base64,${ele.profile.photo.data.toString('base64')}`} alt="Profile Photo" />
 
-            <h1>{ele.name}</h1>
-            <h1>{ele.service}</h1>
-            <h1>{ele.profile.city}</h1>
-            <h1>{ele.profile.address}</h1>
-            <h1 className="hidden">{ele.email}</h1>
-            <button
-              onClick={() => handleSelectProvider(ele.email)}
-              className="bg-sky-600 hover:bg-sky-500 hidden md:inline p-2 text-white"
-            >
-              Envoyer un message
-            </button>
-          </div>
-        ))}
+                    <h1>{ele.name}</h1>
+                    <h1 className='hidden'>{ele.email}</h1>
+                    <h1>{ele.profile.city}</h1>
+                    <h1>{ele.profile.address}</h1>
+
+                    <button data-toggle="modal" data-target="#exampleModal" onClick={() => handleSelectProvider(ele.email)} className='bg-sky-600 hover:bg-sky-500 p-2 text-white'>
+                        Envoyer un message
+                    </button>
+                </div>
+            ))}
+        </div>
+    }
       </div>
       <div
         className={
@@ -126,7 +126,7 @@ function Peinture() {
                 <textarea
                   name="message"
                   className="border-2 border-sky-200 bg-gray-100 rounded-lg p-3 w-72 h-60 focus:outline-sky-600"
-                  placeholder="Bonjour, est ce que ..."
+                  placeholder="Veuillez décrire en détail la panne que vous souhaitez réparer, y compris les informations pertinentes sur l'équipement, la situation et les symptômes observés. Plus vous fournissez d'informations, plus il sera facile pour le prestataire de comprendre et de résoudre votre problème rapidement."
                 ></textarea>
                 <input
                   className="px-6

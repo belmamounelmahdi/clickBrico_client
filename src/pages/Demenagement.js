@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import Loading from '../components/Loading';
 import {API_URL} from '../config';
 
-function Electriciens() {
+function Demenagement() {
 
     const auth = useSelector(state => state.auth)
     const user = {
@@ -28,8 +28,7 @@ function Electriciens() {
             'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-            senderName: auth.user.name, // Remplacez 'sender' par 'senderName'
-            senderEmail: auth.user.email, // Ajoutez une nouvelle clé 'senderEmail'
+            sender: user.name,
             recipient: selectedProviderEmail,
             body: message
             })
@@ -50,7 +49,7 @@ function Electriciens() {
     
     useEffect(() => {
         window.scrollTo(0, 0)
-        axios.get(`${API_URL}/service-electriciens`)
+        axios.get(`${API_URL}/service-demenage`)
         .then(res => {
             setJobberProfiles(res.data);
         //     if (res.data.profile.photo) {
@@ -59,9 +58,9 @@ function Electriciens() {
         //     setPhotoUrl(photoUrl);
         // }
         }) 
-
         .catch(err => console.log(err));
     }, []);
+
     return (
     <div>
         <h1 className='font-semibold text-xl text-center m-4'>
@@ -91,7 +90,29 @@ function Electriciens() {
             ))}
         </div>
     }
-
+{/* () => handleSelectProvider(ele.email) <div className={display+ " modal fade fixed w-1/4 h-screen right-0 top-20 outline-none overflow-x-hidden overflow-y-auto"}>
+  <div className="modal-dialog relative transform translate-x-full transition-transform duration-500 pointer-events-none">
+    <div className="modal-content border-none shadow-lg relative pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+      <div className="modal-header p-4 border-b border-gray-200 rounded-t-md">
+        <h5 className="text-xl font-medium leading-normal text-gray-800" id="exampleModalLabel">Envoyer un message</h5>
+      </div>
+      <div className="p-4">
+        <form className="flex flex-col space-y-1" onSubmit={(e) => {
+          e.preventDefault();
+          sendMessage(e.target.message.value);
+          e.target.message.value = "";
+        }}>
+          <label htmlFor="message">Message</label>
+          <textarea name="message" className="border-2 border-sky-200 bg-gray-100 rounded-lg p-3 w-72 h-60 focus:outline-sky-600"  placeholder="Bonjour, est ce que ..." ></textarea>
+          <input className="px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-1" type="submit" value="Envoyer" />
+        </form>
+      </div>
+      <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
+        <button onClick={handelClose} type="button" className="px-6 py-2.5 bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div> modal-dialog fade fixed w-1/4 h-screen right-0 top-20 transform transition-transform duration-500 outline-none overflow-x-hidden overflow-y-auto */}
 
         <div className={display + " modal-dialog fade fixed h-screen right-0 top-20 duration-500 outline-none overflow-x-hidden overflow-y-auto"}
              id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
@@ -157,4 +178,4 @@ function Electriciens() {
     )
 }
 
-export default Electriciens
+export default Demenagement

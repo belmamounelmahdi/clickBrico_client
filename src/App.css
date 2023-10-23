@@ -1,6 +1,7 @@
 @import './css/home.css';
 @import './css/avis.css';
 @import './css/loading.css';
+@import './css/procedurePage.css';
 @import url("~leaflet/dist/leaflet.css");
 .leaflet-container {
     width: 100%;
@@ -14,3 +15,4 @@
 .carousel {
     width: 65%;
 }
+

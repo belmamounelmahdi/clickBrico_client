@@ -29,7 +29,10 @@ import Plombie from './pages/Plombie'
 import Menage from './pages/Ménage'
 import ShareApp from './components/ShareApp'
 import Chat from './pages/Chat'
-
+import Demenagement from './pages/Demenagement'
+import Messages from './pages/Messages'
+import MessageContext from './components/MessageContext';
+import { useState } from 'react'
 
 if (window.localStorage.jwt) {
   const decode = jwt_decode(localStorage.jwt)
@@ -42,6 +45,7 @@ if (window.localStorage.jwt) {
 }
 
 function App() {
+  const [unreadMessagesCount, setUnreadMessagesCount] = useState(0);
   const auth = useSelector(state => state.auth)
   const user = {
     isConnected: auth.isConnected,
@@ -52,9 +56,13 @@ function App() {
   }
   document.title = 'Click Brico votre platforme pour Trouvez le prestataire idéal pour tous les services'
   return (
+    <MessageContext.Provider
+      value={{ unreadMessagesCount, setUnreadMessagesCount }}
+    >
     <BrowserRouter>
+
     <div className="App">
-      <Nav user={user} />
+    <Nav user={{ ...user, unreadMessagesCount }} />
       <ShareApp/>
 
 
@@ -90,9 +98,17 @@ function App() {
         <PrivateRouter user={user}>
           <Menage />
         </PrivateRouter>}/>
+        <Route path='/demenagement' element={
+        <PrivateRouter user={user}>
+          <Demenagement />
+        </PrivateRouter>}/>
         <Route path='/chat' element={
         <PrivateRouter user={user}>
           <Chat />
+        </PrivateRouter>}/>
+        <Route path='/messages' element={
+        <PrivateRouter user={user}>
+          <Messages />
         </PrivateRouter>}/>
         <Route path='demanderservice' element={<DemanderService/>}/>
         <Route path='ajoutePrestataire' element={<AjoutePrestataire/>}/>
@@ -104,6 +120,7 @@ function App() {
         <ForceRedirect user={user}>
           <Inscription/>
         </ForceRedirect>}/>
+        
         <Route path='avis' element={<Avis/>}/>
         <Route path='*' element={<NotFound/>}/>
         <Route path='/noaccess' element={<NoAccess/>}/>
@@ -122,6 +139,7 @@ function App() {
 
     </div>
     </BrowserRouter>
+    </MessageContext.Provider>
   )
 }
 
