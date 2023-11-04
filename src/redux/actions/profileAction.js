@@ -1,5 +1,5 @@
 import axios from 'axios'
-import API_URL from '../../config'
+import {API_URL} from '../../config'
 import { DELETE_PROFILE, ERRORS, SET_PROFILE, SET_PROFILES } from '../types'
 
 

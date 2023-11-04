@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/alt-text */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Transition } from "@headlessui/react";
 import logo from "../assets/LogoClickBrico.png";
 import { Link } from "react-router-dom";
@@ -14,13 +15,41 @@ import {
 import { FaGoogle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Logout } from "../redux/actions/authActions";
+import axios from "axios";
+import { API_URL } from "../config";
 
 export default function Nav({ user }) {
+  const auth = useSelector(state => state.auth);
+  const [messages, setMessages] = useState([]);
+  const [unreadMessagesCount, setUnreadMessagesCount] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [display, setDisplay] = useState("hidden");
   const [displayList, setDisplayList] = useState(false);
   const profiles = useSelector((state) => state.profiles);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    async function fetchMessages() {
+      try {
+        const response = await axios.get(`${API_URL}/message-accepted/${auth.user.id}`);
+
+        setMessages(response.data);
+    
+        // Incrémenter le nombre de messages non lus
+        const newMessagesCount = response.data.filter((message) => !message.read).length;
+        setUnreadMessagesCount(newMessagesCount);
+      } catch (error) {
+        console.error("Error fetching messages:", error); // Modifier cette ligne pour voir les erreurs éventuelles
+      }
+    }
+    if (user.isConnected) {
+      fetchMessages();
+      const intervalId = setInterval(fetchMessages, 5000); // Appeler fetchMessages toutes les 5 secondes
+      return () => clearInterval(intervalId); // Annuler l'intervalle lorsque le composant est démonté
+    }
+  }, [user]); // Ajoutez la dépendance 'messages' ici
+  
+  
 
   const LogoutHandler = () => {
     dispatch(Logout());
@@ -130,10 +159,18 @@ export default function Nav({ user }) {
                               <button className="hover:bg-gray-300 rounded-3xl p-2">
                                 <FontAwesomeIcon icon={faCaretDown} />
                               </button>
-                              <FontAwesomeIcon
-                                className="text-gray-500"
-                                icon={faBell}
-                              />
+                              <div>
+        <span className="relative inline-block">
+          <FontAwesomeIcon className="text-gray-500" icon={faBell} />
+          {/* Afficher le nombre de messages non lus */}
+          {unreadMessagesCount > 0 && (
+            <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
+              {unreadMessagesCount}
+            </span>
+          )}
+        </span>
+      </div>
+
                             </div>
                             {displayList && (
                               <ul
@@ -144,11 +181,13 @@ export default function Nav({ user }) {
                                 <li className="text-gray-600 p-2">
                                   {user.email}
                                 </li>
-                                <li className="text-gray-600 p-2">
-                                  {profiles.profile === null
-                                    ? ""
-                                    : profiles.profile.tel}
-                                </li>
+                                <Link to="/messages">
+                                  <li className="hover:bg-gray-300 p-2 cursor-pointer">
+                                  Messages
+                                  </li>
+                                </Link>
+
+
                                 <Link to={user.role === 'ADMIN' ? '/utilisateurs' : '/setting-user'}>
                                   <li className="hover:bg-gray-300 p-2 cursor-pointer w-auto">
                                     {user.role === 'ADMIN' ? 'DashBoard' :  'Paramétre du compte'}
@@ -171,6 +210,17 @@ export default function Nav({ user }) {
                 Demander un service
               </Link>
               <div className="-mr-2 flex md:hidden">
+              {user.isConnected ? (
+    <span className="relative inline-block mr-5 mt-2">
+      <FontAwesomeIcon className="text-gray-500" icon={faBell} />
+      {/* Afficher le nombre de messages non lus */}
+      {unreadMessagesCount > 0 && (
+        <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
+          {unreadMessagesCount}
+        </span>
+      )}
+    </span>
+  ) : null}
                 <button
                   onClick={() => setIsOpen(!isOpen)}
                   type="button"
@@ -218,67 +268,75 @@ export default function Nav({ user }) {
           </div>
 
           <Transition
-            show={isOpen}
-            enter="transition ease-out duration-100 transform"
-            enterFrom="opacity-0 scale-95"
-            enterTo="opacity-100 scale-100"
-            leave="transition ease-in duration-75 transform"
-            leaveFrom="opacity-100 scale-100"
-            leaveTo="opacity-0 scale-95"
-          >
-            {(ref) => (
-              <div className="md:hidden" id="mobile-menu">
-                <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                  <Link
-                    to="/"
-                    className="text-stone-500 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                  >
-                    Accueil
-                  </Link>
-                  <Link
-                    to="/ajoutePrestataire"
-                    className="text-stone-500 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                  >
-                    Devenir prestataire
-                  </Link>
-                  {!user.isConnected ? (
-                    <div>
-                      <Link
-                        to="/login"
-                        className=" hover:bg-gray-300 text-gray-600 px-3 py-2 rounded-md text-sm font-medium"
-                      >
-                        Connexion
-                      </Link>
-                      <Link
-                        to="register"
-                        className=" hover:bg-gray-300 text-gray-600 px-3 py-2 rounded-md text-sm font-medium"
-                      >
-                        Inscription
-                      </Link>
-                    </div>
-                  ) : (
-                    <div>
-                      <div className="md:flex md:justify-between items-center">
-                        <Link
-                          to="#"
-                          onClick={LogoutHandler}
-                          className=" text-stone-500 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                        >
-                          Déconnexion
-                        </Link>
-                      </div>
-                    </div>
-                  )}
-                  <Link
-                    to="/setting-user"
-                    className="text-stone-500 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                  >
-                    Paramétres du compte
-                  </Link>
-                </div>
-              </div>
-            )}
-          </Transition>
+  show={isOpen}
+  enter="transition ease-out duration-100 transform"
+  enterFrom="opacity-0 scale-95"
+  enterTo="opacity-100 scale-100"
+  leave="transition ease-in duration-75 transform"
+  leaveFrom="opacity-100 scale-100"
+  leaveTo="opacity-0 scale-95"
+>
+  {(ref) => (
+    <div className="md:hidden" id="mobile-menu">
+      <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <Link
+          to="/"
+          className="text-stone-500 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+        >
+          Accueil
+        </Link>
+        <Link
+          to="/ajoutePrestataire"
+          className="text-stone-500 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+        >
+          Devenir prestataire
+        </Link>
+        {!user.isConnected ? (
+          <>
+            <Link
+              to="/login"
+              className="text-stone-500 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+            >
+              Connexion
+            </Link>
+            <Link
+              to="register"
+              className="text-stone-500 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+            >
+              Inscription
+            </Link>
+          </>
+        ) : (
+          <>
+            
+            <Link to="/messages">
+              <span className="text-stone-500 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+                Messages
+              </span>
+            </Link>
+            <Link to={user.role === 'ADMIN' ? '/utilisateurs' : '/setting-user'}>
+              <span className="text-stone-500 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+                {user.role === 'ADMIN' ? 'DashBoard' : 'Paramétre du compte'}
+              </span>
+            </Link>
+            <div className="flex justify-between items-center">
+              <Link
+                to="#"
+                onClick={LogoutHandler}
+                className="text-stone-500 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+              >
+                Déconnexion
+              </Link>
+              
+            </div>
+          </>
+        )}
+
+      </div>
+    </div>
+  )}
+</Transition>
+
         </nav>
 
         {/** Start Modal Connexion */}

@@ -57,7 +57,7 @@ fetchData()
 
     return ( 
         
-        <div className="h-screen">
+        <div className="relative">
         
 
         <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative text-center" style={{ display: show ? "block" : "none"}} role="alert">
@@ -192,7 +192,7 @@ fetchData()
                         </Link>
                     </div>
                     <div className="svc w-72 md:w-auto shadow-2xl ml-6 mr-6 mb-6 rounded-lg cursor-pointer transition ease-in-out delay-150 hover:scale-105">
-                        <Link to="/connexion">
+                        <Link to="/demenagement">
                         <img className="rounded-t-xl" src={demenage}/>
                         <h1 className="ml-2">
                             Déménagement
@@ -225,34 +225,6 @@ fetchData()
                     </div>
                 </div>
             </div>
-{/* 
-            <div className="flex flex-col items-center mt-28 ">
-            <p>
-            Important: Pour activer votre compte, veuillez compléter votre profile
-            </p>
-            <form className="space-y-4 mt-6 flex flex-col items-center">
-            <Inputs name="tel" placeholder="Téléphone" value={form && form.tel ? form.tel: ""} type="text" icon={faPhone} handelChange={handelChange} errors={errors.tel} />
-            <Inputs name="city" placeholder="Ville" value={form && form.city ?form.city: ""} type="text" icon={faCity} handelChange={handelChange} errors={errors.city} />
-            <Inputs name="address" placeholder="Address" value={form && form.address ? form.address: ""} type="text" icon={faMapLocation} handelChange={handelChange} errors={errors.address} />
-            <button onClick={handelSubmit} className="bg-sky-600 text-white p-3 w-40 md:w-56">
-                Enregistrer
-            </button>
-            </form>
-            </div> */}
-
-{/* <>
-            <h1 className="text-center text-4xl mt-8">
-                        Merci de nous avoir rejoint {user.name} !
-                    </h1><p className="text-center text-xl mt-4">
-                            On est heureux de vous accueillir dans la communauté Click Brico et de vous aider à trouvez des préstataires idéal pour tous vos besoin .
-                        </p><p className="text-center text-xl mt-4">
-                        Important: Pour activer votre compte, veuillez compléter votre profile
-                        </p><div className="flex justify-center mt-4">
-                        <button onClick={() => setDisplay('inline')} className="bg-sky-600 text-white p-3 w-40 md:w-56">
-                                Compléter mon profile
-                                </button>
-                        </div>
-            </> */}
         </div>
         
     );

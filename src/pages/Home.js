@@ -79,7 +79,7 @@ const Home = () => {
                         </Link>
                     </div>
                     <div className="svc w-72 md:w-auto shadow-2xl ml-6 mr-6 mb-6 rounded-lg cursor-pointer transition ease-in-out delay-150 hover:scale-105">
-                        <Link to="/connexion">
+                        <Link to={user.isConnected ? '/demenagement' : "/login"}>
                         <img className="rounded-t-xl" src={demenage}/>
                         <h1 className="ml-2">
                             Déménagement
@@ -207,7 +207,7 @@ const Home = () => {
         {/** Start Avis Clients */}
 
         <div className="flex flex-col space-y-16 md:flex-row md:justify-between border-solid border-2 rounded-3xl m-6 md:m-36 p-10 md:pl-24 md:pr-24 md:pt-10 md:pb-10">
-            <div className="content-left w-auto md:w-96">
+            <div className="content-left flex flex-col justify-center w-auto md:w-96">
                 <h1 className="text-lg font-semibold">
                     Les utilisateurs nous font confiance
                 </h1>
